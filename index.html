@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f6f2">
+  <meta name="description" content="Профессиональные услуги для вашего бизнеса. Оставьте заявку и получите консультацию.">
+  <title>Ваш бизнес — профессиональные услуги</title>
+  <style>
+    :root {
+      --bg: #f7f6f2;
+      --surface: #ffffff;
+      --text: #20211f;
+      --muted: #777a73;
+      --accent: #b8ef65;
+      --dark: #20211f;
+      --radius: 22px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: auto; }
+    .header { padding: 22px 0; }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { font-size: 21px; font-weight: 800; letter-spacing: -1px; }
+    .nav-links { display: flex; gap: 28px; color: var(--muted); font-size: 14px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 15px 23px; border: 0; border-radius: 999px;
+      background: var(--accent); color: var(--dark);
+      font-weight: 700; cursor: pointer; transition: .2s;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .hero { padding: 78px 0 90px; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 55px; align-items: center; }
+    .eyebrow { color: var(--muted); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+    h1 { max-width: 720px; margin: 20px 0; font-size: clamp(42px, 6vw, 76px); line-height: 1.02; letter-spacing: -4px; }
+    .hero p { max-width: 520px; color: var(--muted); font-size: 18px; }
+    .hero-actions { display: flex; align-items: center; gap: 20px; margin-top: 30px; flex-wrap: wrap; }
+    .hero-note { color: var(--muted); font-size: 13px; }
+    .visual {
+      min-height: 390px; border-radius: 30px; background: #dfe8d1;
+      position: relative; overflow: hidden; display: grid; place-items: center;
+    }
+    .visual-shape { width: 230px; height: 280px; border-radius: 48% 48% 20px 20px; background: #b8ef65; transform: rotate(-12deg); }
+    .visual-label { position: absolute; bottom: 22px; left: 22px; padding: 12px 17px; background: white; border-radius: 14px; font-size: 13px; font-weight: 700; }
+    section { padding: 78px 0; }
+    .section-head { max-width: 650px; margin-bottom: 38px; }
+    h2 { margin: 12px 0; font-size: clamp(32px, 4vw, 48px); line-height: 1.08; letter-spacing: -2px; }
+    .section-head p { color: var(--muted); }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { padding: 28px; border-radius: var(--radius); background: var(--surface); }
+    .card-number { color: var(--muted); font-size: 13px; }
+    .card h3 { margin: 30px 0 10px; font-size: 21px; }
+    .card p { margin: 0; color: var(--muted); font-size: 15px; }
+    .dark-section { background: var(--dark); color: white; }
+    .dark-section .section-head p { color: #b7b9b2; }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+    .step { padding: 23px; border: 1px solid #454741; border-radius: 18px; }
+    .step span { color: var(--accent); font-size: 13px; }
+    .step h3 { margin: 22px 0 8px; }
+    .step p { color: #b7b9b2; font-size: 14px; }
+    .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .review { padding: 25px; background: white; border-radius: var(--radius); }
+    .review p { color: var(--muted); }
+    .review strong { display: block; margin-top: 22px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+    .contact-form { display: grid; gap: 13px; padding: 28px; background: white; border-radius: var(--radius); }
+    .contact-form input, .contact-form textarea {
+      width: 100%; padding: 16px; border: 1px solid #e5e5df; border-radius: 12px; outline: none;
+    }
+    .contact-form textarea { min-height: 110px; resize: vertical; }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: #777; }
+    .form-note { color: var(--muted); font-size: 12px; }
+    footer { padding: 30px 0; border-top: 1px solid #e3e2dc; color: var(--muted); font-size: 13px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+
+    @media (max-width: 800px) {
+      .nav-links { display: none; }
+      .hero { padding: 45px 0 60px; }
+      .hero-grid, .contact-grid { grid-template-columns: 1fr; gap: 30px; }
+      .visual { min-height: 290px; }
+      .cards, .reviews { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      h1 { letter-spacing: -2px; }
+    }
+    @media (max-width: 480px) {
+      .container { width: min(100% - 28px, var(--max)); }
+      .header .button { padding: 12px 15px; font-size: 13px; }
+      .steps { grid-template-columns: 1fr; }
+      section { padding: 55px 0; }
+      .hero-actions { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a class="logo" href="#">ВАШ БИЗНЕС<span style="color:#8bbd3d">.</span></a>
+      <nav class="nav-links">
+        <a href="#services">Услуги</a>
+        <a href="#about">О нас</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <a class="button" href="#contacts">Оставить заявку</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Профессиональный подход к вашему запросу</div>
+          <h1>Решение, которое работает на ваш результат.</h1>
+          <p>Помогаем клиентам решать задачи качественно, удобно и без лишних сложностей. Расскажите, что вам нужно — предложим подходящий вариант.</p>
+          <div class="hero-actions">
+            <a class="button" href="#contacts">Получить консультацию</a>
+            <span class="hero-note">Ответим и обсудим вашу задачу</span>
+          </div>
+        </div>
+        <div class="visual" aria-label="Декоративная иллюстрация">
+          <div class="visual-shape"></div>
+          <div class="visual-label">Ваш результат начинается здесь</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Что мы предлагаем</div>
+          <h2>Услуги под ваши задачи</h2>
+          <p>Здесь будут представлены основные направления работы компании и конкретная польза для клиента.</p>
+        </div>
+        <div class="cards">
+          <article class="card"><div class="card-number">01 / НАПРАВЛЕНИЕ</div><h3>Основная услуга</h3><p>Кратко опишите услугу, её преимущества и какую задачу клиента она решает.</p></article>
+          <article class="card"><div class="card-number">02 / НАПРАВЛЕНИЕ</div><h3>Дополнительная услуга</h3><p>Покажите дополнительную ценность, удобство и выгоду сотрудничества.</p></article>
+          <article class="card"><div class="card-number">03 / НАПРАВЛЕНИЕ</div><h3>Индивидуальное решение</h3><p>Расскажите, как вы работаете с нестандартными запросами клиентов.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section" id="about">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Понятный процесс</div>
+          <h2>От первого обращения до результата</h2>
+          <p>Уберите неопределённость: покажите клиенту, что будет происходить после заявки.</p>
+        </div>
+        <div class="steps">
+          <article class="step"><span>ШАГ 01</span><h3>Заявка</h3><p>Вы рассказываете о своей задаче.</p></article>
+          <article class="step"><span>ШАГ 02</span><h3>Обсуждение</h3><p>Уточняем детали и подбираем решение.</p></article>
+          <article class="step"><span>ШАГ 03</span><h3>Работа</h3><p>Согласовываем условия и приступаем.</p></article>
+          <article class="step"><span>ШАГ 04</span><h3>Результат</h3><p>Вы получаете согласованный результат.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Доверие клиентов</div>
+          <h2>Что говорят о нашей работе</h2>
+          <p>Замените демонстрационные тексты реальными отзывами клиентов с их разрешения.</p>
+        </div>
+        <div class="reviews">
+          <article class="review"><p>«Добавьте сюда реальный отзыв клиента о качестве и результате работы»</p><strong>Имя клиента</strong></article>
+          <article class="review"><p>«Добавьте сюда отзыв, который раскрывает важное преимущество компании»</p><strong>Имя клиента</strong></article>
+          <article class="review"><p>«Добавьте сюда отзыв о процессе сотрудничества и впечатлениях»</p><strong>Имя клиента</strong></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacts">
+      <div class="container contact-grid">
+        <div class="section-head">
+          <div class="eyebrow">Свяжитесь с нами</div>
+          <h2>Расскажите о своей задаче</h2>
+          <p>Оставьте контакты. Мы обсудим ваш запрос, ответим на вопросы и предложим дальнейшие шаги.</p>
+          <p><strong>Телефон:</strong> +7 (000) 000-00-00</p>
+          <p><strong>Адрес:</strong> Укажите адрес компании</p>
+        </div>
+        <form class="contact-form" id="lead-form">
+          <input type="text" name="name" placeholder="Ваше имя" required>
+          <input type="tel" name="phone" placeholder="Номер телефона" required>
+          <textarea name="message" placeholder="Кратко опишите задачу"></textarea>
+          <button class="button" type="submit">Отправить заявку</button>
+          <div class="form-note">Демонстрационная форма. Перед запуском подключите отправку заявок и политику обработки персональных данных.</div>
+          <div id="form-status" role="status"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> ВАШ БИЗНЕС. Все права защищены.</span>
+      <span>Политика конфиденциальности — добавьте ссылку перед публикацией.</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('lead-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      document.getElementById('form-status').textContent =
+        'Это демонстрационная форма. Отправка заявок пока не подключена.';
+    });
+  </script>
+</body>
+</html>
