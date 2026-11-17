@@ -48,18 +48,17 @@ export default function Home() {
       const start = await fetch("/api/try-on",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({roomImageUrl:roomUrl,furnitureImageUrl:sofaUrl,modelType:model,prompt})});
       const payload = await start.json();
       if (!start.ok) throw new Error(payload.error || "Не удалось запустить визуализацию");
+      let finished = false;
       for (let i=0;i<45;i++) {
         await new Promise(r=>setTimeout(r,4000));
         const check = await fetch("/api/try-on?taskId="+encodeURIComponent(payload.taskId),{cache:"no-store"});
         const status = await check.json();
         if (!check.ok) throw new Error(status.error || "Не удалось получить результат");
         setProgress(Math.max(8,status.percentage || Math.min(92,8+i*2)));
-        if (status.status==="Success" && status.resultUrl) { setResult(status.resultUrl); setProgress(100); break; }
+        if (status.status==="Success" && status.resultUrl) { setResult(status.resultUrl); setProgress(100); finished = true; break; }
         if (status.status==="Failed") throw new Error("ИИ не смог обработать эту пару изображений. Попробуйте другое фото комнаты или дивана.");
       }
-      if (!result && progress<100) {
-        // The task may still be running; user can retry after checking provider status.
-      }
+      if (!finished) throw new Error("Визуализация ещё обрабатывается. Попробуйте запустить проверку результата немного позже.");
     } catch(e) { setError(e.message || "Ошибка генерации. Попробуйте ещё раз."); }
     finally { setBusy(false); }
   }
@@ -117,7 +116,7 @@ export default function Home() {
         {error && <div className="error">{error}</div>}
         <button className="generate-btn" disabled={!canGenerate} onClick={generate}>{busy?<><span className="spinner"></span> Создаём визуализацию…</>:<>Создать визуализацию <span>→</span></>}</button>
         {busy && <div className="progress-wrap"><div className="progress-track"><div style={{width:fmt(progress)}}/></div><small>ИИ анализирует перспективу и освещение · {fmt(progress)}</small></div>}
-        <p className="privacy">Фотографии используются только для создания визуализации. Не загружайте изображения с личными или конфиденциальными данными.</p>
+        <p className="privacy">Фото комнаты и дивана загружаются в публичное хранилище по уникальным ссылкам и передаются провайдеру ИИ для обработки. Не загружайте личные или конфиденциальные изображения.</p>
       </aside>
 
       <div className="preview-area">
